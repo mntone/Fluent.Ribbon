@@ -30,6 +30,11 @@
                                HorizontalAlignment="Center"
                                Text="{Binding Path=Title,RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}"
                                Foreground="Black"
+                               FontFamily="{x:Static SystemFonts.CaptionFontFamily}"
+                               FontSize="{x:Static SystemFonts.CaptionFontSize}"
+                               FontStyle="{x:Static SystemFonts.CaptionFontStyle}"
+                               FontWeight="{x:Static SystemFonts.CaptionFontWeight}"
+                               TextDecorations="{x:Static SystemFonts.CaptionFontTextDecorations}"
                                TextWrapping="NoWrap"
                                TextTrimming="CharacterEllipsis" />
                 </Fluent:RibbonTitleBar.Header>
