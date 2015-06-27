@@ -289,8 +289,7 @@
             </Border>
             <Grid x:Name="TabsGrid"
                   HorizontalAlignment="Stretch"
-                  Margin="0"
-                  Width="Auto"
+				  MinHeight="24"
                   Grid.RowSpan="1">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*" />
@@ -303,13 +302,13 @@
                            Margin="0,0,0,1" />
 
                 <DockPanel LastChildFill="True">
-                    <ContentPresenter VerticalAlignment="Stretch"
+                    <ContentPresenter VerticalAlignment="Top"
                                       ContentSource="Menu"
                                       DockPanel.Dock="Left" />
                     <Fluent:RibbonScrollViewer x:Name="scrollViewer"
                                                DockPanel.Dock="Right"
                                                HorizontalAlignment="Left"
-                                               Margin="0,-7,1,0"
+                                               Margin="0,0,1,0"
                                                Width="Auto"
                                                Style="{DynamicResource RibbonTabScrollViewer}"
                                                HorizontalScrollBarVisibility="Auto"
