@@ -33,13 +33,14 @@ namespace Fluent
     [TemplatePart(Name = PART_Icon, Type = typeof(UIElement))]
     [TemplatePart(Name = PART_ContentPresenter, Type = typeof(UIElement))]
     [TemplatePart(Name = PART_WindowCommands, Type = typeof(WindowCommands))]
-    public class RibbonWindow : Window
+    public class RibbonWindow: Window
     {
         private const string PART_Icon = "PART_Icon";
         private const string PART_ContentPresenter = "PART_ContentPresenter";
         private const string PART_WindowCommands = "PART_WindowCommands";
 
         private FrameworkElement iconImage;
+        private bool isSystemMenuOpened = false;
 
         #region Properties
 
@@ -423,9 +424,20 @@ namespace Fluent
             {
                 if (e.ClickCount == 1)
                 {
-                    e.Handled = true;
+                    if (!isSystemMenuOpened)
+                    {
+                        e.Handled = true;
 
-                    ShowSystemMenuPhysicalCoordinates(this, this.PointToScreen(new Point(0, RibbonProperties.GetTitleBarHeight(this))));
+                        ShowSystemMenuPhysicalCoordinates(this, this.iconImage.PointToScreen(new Point(0, this.iconImage.ActualHeight)));
+
+                        isSystemMenuOpened = true;
+                    }
+                    else
+                    {
+                        e.Handled = true;
+
+                        isSystemMenuOpened = false;
+                    }
                 }
                 else if (e.ClickCount == 2)
                 {
