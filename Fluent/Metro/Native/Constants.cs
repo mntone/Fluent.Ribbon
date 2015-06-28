@@ -27,6 +27,8 @@
         public const int SW_SHOWMINIMIZED = 2;
         public const uint SYSCOMMAND = 0x0112;
         public const int WM_INITMENU = 0x116;
+        public const int WM_DPICHANGED = 0x2E0;
+        public const int WM_NCLBUTTONDOWN = 0x00A1;
 
         public const int SC_MAXIMIZE = 0xF030;
         public const int SC_SIZE = 0xF000;

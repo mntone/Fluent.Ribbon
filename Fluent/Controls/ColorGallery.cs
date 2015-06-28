@@ -12,6 +12,7 @@ using System.Windows.Interop;
 using System.Windows.Markup;
 using System.Windows.Media;
 using Microsoft.Win32;
+using Fluent.Internal;
 
 namespace Fluent
 {

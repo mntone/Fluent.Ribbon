@@ -16,6 +16,11 @@
         public static readonly ThicknessConverter ThicknessConverter = new ThicknessConverter();
 
         /// <summary>
+        /// Get a static instance of <see cref="ThicknessConverter"/>
+        /// </summary>
+        public static readonly DoubleAddConverter DoubleAddConverter = new DoubleAddConverter();
+
+        /// <summary>
         /// Get a static instance of <see cref="ObjectToImageConverter"/>
         /// </summary>
         public static readonly ObjectToImageConverter ObjectToImageConverter = new ObjectToImageConverter();

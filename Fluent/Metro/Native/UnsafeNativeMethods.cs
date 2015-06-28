@@ -9,6 +9,7 @@ namespace Fluent.Metro.Native
     using System.Diagnostics.CodeAnalysis;
     using System.Runtime.Versioning;
     using System.Windows;
+    using Fluent.Internal;
 
     /// <devdoc>http://msdn.microsoft.com/en-us/library/ms182161.aspx</devdoc>
     [SuppressUnmanagedCodeSecurity]
@@ -22,15 +23,6 @@ namespace Fluent.Metro.Native
         [return: MarshalAs(UnmanagedType.Bool)]
         internal static extern bool DwmIsCompositionEnabled();
 
-        /// <devdoc>http://msdn.microsoft.com/en-us/library/windows/desktop/aa969512%28v=vs.85%29.aspx</devdoc>
-        [DllImport("dwmapi", PreserveSig = true, CallingConvention = CallingConvention.Winapi, ExactSpelling = true)]
-        [return: MarshalAs(UnmanagedType.Error)]
-        internal static extern int DwmExtendFrameIntoClientArea(IntPtr hWnd, [In] ref MARGINS pMarInset);
-
-        /// <devdoc>http://msdn.microsoft.com/en-us/library/windows/desktop/aa969524%28v=vs.85%29.aspx</devdoc>
-        [DllImport("dwmapi", PreserveSig = true, CallingConvention = CallingConvention.Winapi, ExactSpelling = true)]
-        internal static extern int DwmSetWindowAttribute([In] IntPtr hwnd, [In] int attr, [In] ref int attrValue, [In] int attrSize);
-
         /// <devdoc>http://msdn.microsoft.com/en-us/library/windows/desktop/ms633572%28v=vs.85%29.aspx</devdoc>
         [DllImport("user32", CallingConvention = CallingConvention.Winapi)]
         internal static extern IntPtr DefWindowProc([In] IntPtr hwnd, [In] int msg, [In] IntPtr wParam, [In] IntPtr lParam);
@@ -39,10 +31,6 @@ namespace Fluent.Metro.Native
         [DllImport("user32", EntryPoint = "GetMonitorInfoW", ExactSpelling = true, CharSet = CharSet.Unicode)]
         [return: MarshalAs(UnmanagedType.Bool)]
         internal static extern bool GetMonitorInfo([In] IntPtr hMonitor, [Out] MONITORINFO lpmi);
-
-        /// <devdoc>http://msdn.microsoft.com/en-us/library/dd145064%28v=VS.85%29.aspx</devdoc>
-        [DllImport("user32")]
-        internal static extern IntPtr MonitorFromWindow([In] IntPtr handle, [In] int flags);
 
         [DllImport("user32.dll", SetLastError = true)]
         internal static extern IntPtr MonitorFromPoint(POINT pt, MONITORINFO.MonitorOptions dwFlags);
@@ -59,14 +47,6 @@ namespace Fluent.Metro.Native
         /// <devdoc>http://msdn.microsoft.com/en-us/library/windows/desktop/ms633528(v=vs.85).aspx</devdoc>
         [DllImport("user32", CharSet = CharSet.Auto, ExactSpelling = true)]
         internal static extern bool IsWindow([In] [Optional] IntPtr hWnd);
-
-        /// <devdoc>http://msdn.microsoft.com/en-us/library/windows/desktop/ms647985(v=vs.85).aspx</devdoc>
-        [DllImport("user32")]
-        internal static extern IntPtr GetSystemMenu([In] IntPtr hWnd, [In] bool bRevert);
-
-        /// <devdoc>http://msdn.microsoft.com/en-us/library/windows/desktop/ms648003(v=vs.85).aspx</devdoc>
-        [DllImport("user32")]
-        internal static extern uint TrackPopupMenuEx([In] IntPtr hmenu, [In] uint fuFlags, [In] int x, [In] int y, [In] IntPtr hwnd, [In] [Optional] IntPtr lptpm);
 
         /// <devdoc>http://msdn.microsoft.com/en-us/library/windows/desktop/ms644944(v=vs.85).aspx</devdoc>
         [DllImport("user32", EntryPoint = "PostMessage", SetLastError = true)]
@@ -177,22 +157,12 @@ namespace Fluent.Metro.Native
 
         internal static int GET_X_LPARAM(IntPtr lParam)
         {
-            return LOWORD(lParam.ToInt32());
+            return lParam.ToLoWord();
         }
 
         internal static int GET_Y_LPARAM(IntPtr lParam)
         {
-            return HIWORD(lParam.ToInt32());
-        }
-
-        private static int HIWORD(long i)
-        {
-            return (short)(i >> 16);
-        }
-
-        private static int LOWORD(long i)
-        {
-            return (short)(i & 0xFFFF);
+            return lParam.ToHiWord();
         }
 
         internal const int GWL_STYLE = -16;

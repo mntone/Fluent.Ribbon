@@ -10,12 +10,15 @@
 using System;
 using System.Runtime.InteropServices;
 
-namespace Fluent
+namespace Fluent.Internal
 {
     using Fluent.Metro.Native;
 
     static internal class NativeMethods
     {
+        private const string User32Library = "user32.dll";
+        private const string ShCoreLibrary = "ShCore.dll";
+
         /// <summary>
         /// Causes the dialog box to display all available colors in the set of basic colors. 
         /// </summary>
@@ -34,7 +37,7 @@ namespace Fluent
         /// is an HMONITOR handle to the display monitor that has the largest area of intersection with the rectangle.
         /// If the rectangle does not intersect a display monitor, the return value depends on the value of dwFlags.
         /// </returns>
-        [DllImport("user32.dll")]
+        [DllImport(User32Library)]
         public static extern IntPtr MonitorFromRect([In] ref RECT lprc, uint dwFlags);
 
         /// <summary>
@@ -47,7 +50,7 @@ namespace Fluent
         /// <param name="cyDesired">Specifies the height, in pixels, of the icon or cursor</param>
         /// <param name="fuLoad">This parameter can be one or more of the following values.</param>
         /// <returns>If the function succeeds, the return value is the requested value.If the function fails, the return value is zero. To get extended error information, call GetLastError. </returns>
-        [DllImport("user32.dll", CharSet = CharSet.Auto, SetLastError = true)]
+        [DllImport(User32Library, CharSet = CharSet.Auto, SetLastError = true)]
         public static extern IntPtr LoadImage(IntPtr hinst, IntPtr lpszName, uint uType, int cxDesired, int cyDesired, uint fuLoad);
 
         /// <summary>
@@ -139,7 +142,27 @@ namespace Fluent
         /// <param name="wParam">First message parameter </param>
         /// <param name="lParam">Second message parameter </param>
         /// <returns></returns>
-        [DllImport("user32.dll")]
+        [DllImport(User32Library)]
         public static extern IntPtr SendMessage(IntPtr hWnd, int Msg, IntPtr wParam, IntPtr lParam);
+
+        [DllImport(ShCoreLibrary, SetLastError = false, PreserveSig = false)]
+        public static extern void GetProcessDpiAwareness(IntPtr hprocess, out ProcessDpiAwareness value);
+
+        [DllImport(ShCoreLibrary, SetLastError = false)]
+        public static extern int SetProcessDpiAwareness(ProcessDpiAwareness value);
+
+        [DllImport(ShCoreLibrary, SetLastError = false, PreserveSig = false)]
+        public static extern void GetDpiForMonitor(IntPtr hmonitor, MonitorDpiType dpiType, ref uint dpiX, ref uint dpiY);
+
+        [DllImport(User32Library, SetLastError = true)]
+        public static extern IntPtr MonitorFromWindow(IntPtr hwnd, MonitorDefaultTo dwFlags);
+
+        public const int SPI_GETNONCLIENTMETRICS = 41;
+
+        [DllImport(User32Library, CharSet = CharSet.Auto)]
+        public static extern int SystemParametersInfo(int uAction, int uParam, ref NonClientMetrics lpvParam, int fuWinIni);
+
+        [DllImport("dwmapi.dll", PreserveSig = false)]
+        static extern void DwmExtendFrameIntoClientArea(IntPtr hwnd, ref Margins margins);
     }
 }

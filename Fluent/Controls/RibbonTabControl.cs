@@ -25,6 +25,7 @@ namespace Fluent
     using System.Windows.Media;
     using Fluent.Metro.Native;
     using Microsoft.Win32;
+    using Fluent.Internal;
 
     /// <summary>
     /// Represents ribbon tab control

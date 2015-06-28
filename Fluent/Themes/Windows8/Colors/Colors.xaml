@@ -7,6 +7,9 @@
 	<SolidColorBrush x:Key="BackstageTopBackgroundBrush"
 					 Color="#DADBDC" />
 
+	<SolidColorBrush x:Key="GroupBoxFontBrush"
+					 Color="#929292" />
+
 
 	<SolidColorBrush x:Key="ComboBoxButtonHoverBorderBrush"
 					 Color="#A8D3FF" />
@@ -31,17 +34,18 @@
 	<SolidColorBrush x:Key="TransparentBrush"
 					 Color="#00000000" />
 
-    <SolidColorBrush x:Key="CheckBoxHoverBackgroundBrush"
-                     Color="#F3F9FF"
-                      />
-    <SolidColorBrush x:Key="CheckBoxHoverBorderBrush"
-                     Color="#3399FF"
-                     />
-    <SolidColorBrush x:Key="CheckBoxPressedBackgroundBrush"
-                     Color="#D9ECFF"
-                     />
-    <SolidColorBrush x:Key="CheckBoxPressedBorderBrush"
-                     Color="#007CDE" />
+	<SolidColorBrush x:Key="CheckBoxBackgroundBrush"
+					 Color="#FFF" />
+	<SolidColorBrush x:Key="CheckBoxBorderBrush"
+					 Color="#5F779D" />
+	<SolidColorBrush x:Key="CheckBoxHoverBackgroundBrush"
+					 Color="#FFF" />
+	<SolidColorBrush x:Key="CheckBoxHoverBorderBrush"
+					 Color="#26A0DA" />
+	<SolidColorBrush x:Key="CheckBoxPressedBackgroundBrush"
+					 Color="#D9EFFF" />
+	<SolidColorBrush x:Key="CheckBoxPressedBorderBrush"
+					 Color="#007ADB" />
 
 	<SolidColorBrush x:Key="GalleryBorderBrush"
 					 Color="#FFE2E4E7" />
@@ -112,6 +116,8 @@
 					 Color="#00000000" />
 
 
+	<SolidColorBrush x:Key="StatusBarBackgroundBrush"
+					 Color="#FFF" />
 	<SolidColorBrush x:Key="StatusBarSeparatorBackgroundBrush"
 					 Color="#FFF7F7F7" />
 	<SolidColorBrush x:Key="StatusBarSeparatorBorderBrush"

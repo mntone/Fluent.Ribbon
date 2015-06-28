@@ -19,6 +19,7 @@ using System.Windows.Media.Imaging;
 
 namespace Fluent
 {
+    using Fluent.Internal;
     using Fluent.Metro.Native;
 
     /// <summary>

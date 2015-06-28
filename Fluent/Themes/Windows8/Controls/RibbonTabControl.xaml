@@ -9,8 +9,6 @@
                      TargetType="{x:Type Fluent:ToggleButton}">
         <Border x:Name="border"
                 BorderThickness="1"
-                Background="{DynamicResource TransparentBrush}"
-                BorderBrush="{DynamicResource TransparentBrush}"
                 Height="22"
                 HorizontalAlignment="Left"
                 VerticalAlignment="Stretch"

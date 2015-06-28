@@ -1,6 +1,7 @@
 ﻿namespace Fluent.Converters
 {
     using System;
+    using System.Linq;
     using System.Globalization;
     using System.Windows;
     using System.Windows.Data;
@@ -21,6 +22,7 @@
         /// <param name="values">The array of values that the source bindings in the <see cref="T:System.Windows.Data.MultiBinding"/> produces. The value <see cref="F:System.Windows.DependencyProperty.UnsetValue"/> indicates that the source binding has no value to provide for conversion.</param><param name="targetType">The type of the binding target property.</param><param name="parameter">The converter parameter to use.</param><param name="culture">The culture to use in the converter.</param>
         public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
         {
+            if (values.Any(v => v == DependencyProperty.UnsetValue)) return DependencyProperty.UnsetValue;
             return new Thickness(System.Convert.ToDouble(values[0]),
                                        System.Convert.ToDouble(values[1]),
                                        System.Convert.ToDouble(values[2]),

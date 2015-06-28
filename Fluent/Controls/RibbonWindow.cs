@@ -40,7 +40,7 @@ namespace Fluent
         private const string PART_WindowCommands = "PART_WindowCommands";
 
         private FrameworkElement iconImage;
-        private bool isSystemMenuOpened = false;
+        internal bool isSystemMenuOpened = false;
 
         #region Properties
 
@@ -72,6 +72,23 @@ namespace Fluent
             set { SetValue(SavePositionProperty, value); }
         }
 
+
+        /// <summary>
+        /// Gets or sets glass border thickness
+        /// </summary>
+        public bool UseDefaultBorderSize
+        {
+            get { return (bool)this.GetValue(UseDefaultBorderSizeProperty); }
+            set { this.SetValue(UseDefaultBorderSizeProperty, value); }
+        }
+
+        /// <summary>
+        /// Using a DependencyProperty as the backing store for BorderWidth.  This enables animation, styling, binding, etc...
+        /// </summary>
+        public static readonly DependencyProperty UseDefaultBorderSizeProperty =
+            DependencyProperty.Register("UseDefaultBorderSize", typeof(bool), typeof(RibbonWindow), new UIPropertyMetadata(false, OnWindowChromeRelevantPropertyChanged));
+
+
         /// <summary>
         /// Gets or sets resize border thickness
         /// </summary>
@@ -90,6 +107,52 @@ namespace Fluent
         /// <summary>
         /// Gets or sets glass border thickness
         /// </summary>
+        public Thickness WindowMargin
+        {
+            get { return (Thickness)this.GetValue(WindowMarginProperty); }
+            set { this.SetValue(WindowMarginProperty, value); }
+        }
+
+        /// <summary>
+        /// Using a DependencyProperty as the backing store for GlassBorderThickness.  This enables animation, styling, binding, etc...
+        /// </summary>
+        public static readonly DependencyProperty WindowMarginProperty =
+            DependencyProperty.Register("WindowMargin", typeof(Thickness), typeof(RibbonWindow), new UIPropertyMetadata(new Thickness(0), OnWindowChromeRelevantPropertyChanged));
+
+        /// <summary>
+        /// Gets or sets glass border thickness
+        /// </summary>
+        public double BorderWidth
+        {
+            get { return (double)this.GetValue(BorderWidthProperty); }
+            set { this.SetValue(BorderWidthProperty, value); }
+        }
+
+        /// <summary>
+        /// Using a DependencyProperty as the backing store for BorderWidth.  This enables animation, styling, binding, etc...
+        /// </summary>
+        public static readonly DependencyProperty BorderWidthProperty =
+            DependencyProperty.Register("BorderWidth", typeof(double), typeof(RibbonWindow), new UIPropertyMetadata(0.0, OnWindowChromeRelevantPropertyChanged));
+
+
+        /// <summary>
+        /// Gets or sets glass border thickness
+        /// </summary>
+        public double TitleBarHeight
+        {
+            get { return (double)this.GetValue(TitleBarHeightProperty); }
+            set { this.SetValue(TitleBarHeightProperty, value); }
+        }
+
+        /// <summary>
+        /// Using a DependencyProperty as the backing store for TitleBarHeight.  This enables animation, styling, binding, etc...
+        /// </summary>
+        public static readonly DependencyProperty TitleBarHeightProperty =
+            DependencyProperty.Register("TitleBarHeight", typeof(double), typeof(RibbonWindow), new UIPropertyMetadata(0.0, OnWindowChromeRelevantPropertyChanged));
+
+        /// <summary>
+        /// Gets or sets glass border thickness
+        /// </summary>
         public Thickness GlassBorderThickness
         {
             get { return (Thickness)GetValue(GlassBorderThicknessProperty); }
@@ -100,7 +163,19 @@ namespace Fluent
         /// Using a DependencyProperty as the backing store for GlassBorderThickness.  This enables animation, styling, binding, etc...
         /// </summary>
         public static readonly DependencyProperty GlassBorderThicknessProperty =
-            DependencyProperty.Register("GlassBorderThickness", typeof(Thickness), typeof(RibbonWindow), new UIPropertyMetadata(new Thickness(8, 50, 8, 8), OnWindowChromeRelevantPropertyChanged));
+            DependencyProperty.Register("GlassBorderThickness", typeof(Thickness), typeof(RibbonWindow), new UIPropertyMetadata(new Thickness(0), OnWindowChromeRelevantPropertyChanged));
+
+        /// <summary>
+        /// Gets or sets glass border thickness
+        /// </summary>
+        public double ExtendedGlassBorderHeight
+        {
+            get { return (double)this.GetValue(ExtendedGlassBorderHeightProperty); }
+            set { this.SetValue(ExtendedGlassBorderHeightProperty, value); }
+        }
+        public static readonly DependencyProperty ExtendedGlassBorderHeightProperty =
+            DependencyProperty.Register("ExtendedGlassBorderHeight", typeof(double), typeof(RibbonWindow), new UIPropertyMetadata(0.0, OnWindowChromeRelevantPropertyChanged));
+
 
         /// <summary>
         /// Gets or sets corner radius 
@@ -196,6 +271,16 @@ namespace Fluent
         public static readonly DependencyProperty IsAutomaticCollapseEnabledProperty =
             DependencyProperty.Register("IsAutomaticCollapseEnabled", typeof(bool), typeof(RibbonWindow), new PropertyMetadata(true));
 
+        public Transform DpiScaleTransform
+        {
+            get { return (Transform)this.GetValue(DpiScaleTransformProperty); }
+            set { this.SetValue(DpiScaleTransformProperty, value); }
+        }
+
+        public static readonly DependencyProperty DpiScaleTransformProperty =
+            DependencyProperty.Register("DpiScaleTransform", typeof(Transform), typeof(RibbonWindow), new UIPropertyMetadata(Transform.Identity));
+
+
         private readonly WindowSizing windowSizing;
 
         #endregion
@@ -236,6 +321,7 @@ namespace Fluent
         public RibbonWindow()
         {
             this.SizeChanged += this.OnSizeChanged;
+            this.StateChanged += (s, e) => this.UpdateWindowChrome();
 
             this.windowSizing = new WindowSizing(this);
         }
@@ -254,9 +340,9 @@ namespace Fluent
 
             this.UpdateCanUseDwm();
 
-            this.UpdateWindowChrome();
-
             this.windowSizing.WindowInitialized();
+
+            this.UpdateWindowChrome();
         }
 
         /// <summary>
@@ -280,13 +366,15 @@ namespace Fluent
         private static void OnWindowChromeRelevantPropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             var window = d as RibbonWindow;
-
             if (window == null)
             {
                 return;
             }
 
-            window.UpdateWindowChrome();
+            if (!window.UseDefaultBorderSize)
+            {
+                window.UpdateWindowChrome();
+            }
         }
 
         private static void OnDontUseDwmChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
@@ -325,20 +413,42 @@ namespace Fluent
             }
         }
 
-        private void UpdateWindowChrome()
+        internal void UpdateWindowChrome()
         {
             var windowChrome = WindowChrome.GetWindowChrome(this);
-
             if (windowChrome == null)
             {
                 windowChrome = new WindowChrome();
                 WindowChrome.SetWindowChrome(this, windowChrome);
             }
 
-            windowChrome.CaptionHeight = RibbonProperties.GetTitleBarHeight(this);
-            windowChrome.CornerRadius = this.CornerRadius;
-            windowChrome.GlassFrameThickness = this.GlassBorderThickness;
-            windowChrome.ResizeBorderThickness = this.ResizeBorderThickness;
+            var metrics = this.windowSizing.GetBorderWidthAndCaptionHeight();
+            var borderWidth = metrics.Item1;
+            if (this.UseDefaultBorderSize)
+            {
+                var captionHeight = metrics.Item2;
+
+                this.BorderWidth = borderWidth;
+                this.TitleBarHeight = Math.Ceiling(this.WindowState == WindowState.Maximized ? captionHeight : borderWidth + captionHeight);
+                this.GlassBorderThickness = new Thickness(borderWidth, Math.Ceiling(borderWidth + captionHeight + this.ExtendedGlassBorderHeight), borderWidth, borderWidth);
+                this.WindowMargin = this.WindowState == WindowState.Maximized
+                    ? new Thickness(borderWidth, Math.Ceiling(borderWidth), borderWidth, borderWidth)
+                    : new Thickness(borderWidth, 0, borderWidth, borderWidth);
+
+                windowChrome.GlassFrameThickness = this.GlassBorderThickness;
+                windowChrome.ResizeBorderThickness = new Thickness(borderWidth);
+            }
+            else
+            {
+                this.WindowMargin = this.WindowState == WindowState.Maximized
+                    ? new Thickness(borderWidth, Math.Ceiling(borderWidth), borderWidth, borderWidth)
+                    : new Thickness(0);
+
+                windowChrome.CaptionHeight = RibbonProperties.GetTitleBarHeight(this);
+                windowChrome.CornerRadius = this.CornerRadius;
+                windowChrome.GlassFrameThickness = this.GlassBorderThickness;
+                windowChrome.ResizeBorderThickness = this.ResizeBorderThickness;
+            }
 #if NET45
             windowChrome.UseAeroCaptionButtons = this.CanUseDwm;
 #endif
@@ -395,13 +505,6 @@ namespace Fluent
             {
                 WindowChrome.SetIsHitTestVisibleInChrome(partWindowCommands, true);
             }
-
-            // This has to be done when the theme is changed. Otherwise maximized windows have the wrong size.
-            if (this.WindowState == WindowState.Maximized)
-            {
-                this.WindowState = WindowState.Normal;
-                this.WindowState = WindowState.Maximized;
-            }
         }
 
         /// <summary>
@@ -428,7 +531,9 @@ namespace Fluent
                     {
                         e.Handled = true;
 
-                        ShowSystemMenuPhysicalCoordinates(this, this.iconImage.PointToScreen(new Point(0, this.iconImage.ActualHeight)));
+                        var physicalPopupPosition = this.iconImage.PointToScreen(new Point(0, this.iconImage.ActualHeight));
+                        var virtualPopupPosition = this.windowSizing.PhysicalToVirtualBySystemDpi(physicalPopupPosition);
+                        SystemCommands.ShowSystemMenu(this, virtualPopupPosition);
 
                         isSystemMenuOpened = true;
                     }
@@ -453,30 +558,10 @@ namespace Fluent
                 this.RunInDispatcherAsync(() =>
                 {
                     var mousePosition = e.GetPosition(this);
-                    ShowSystemMenuPhysicalCoordinates(this, this.PointToScreen(mousePosition));
+                    var physicalPopupPosition = this.PointToScreen(mousePosition);
+                    var virtualPopupPosition = this.windowSizing.PhysicalToVirtualBySystemDpi(physicalPopupPosition);
+                    SystemCommands.ShowSystemMenu(this, virtualPopupPosition);
                 });
-            }
-        }
-
-        private static void ShowSystemMenuPhysicalCoordinates(Window window, Point physicalScreenLocation)
-        {
-            if (window == null)
-            {
-                return;
-            }
-
-            var hwnd = new WindowInteropHelper(window).Handle;
-            if (hwnd == IntPtr.Zero || !UnsafeNativeMethods.IsWindow(hwnd))
-            {
-                return;
-            }
-
-            var hmenu = UnsafeNativeMethods.GetSystemMenu(hwnd, false);
-
-            var cmd = UnsafeNativeMethods.TrackPopupMenuEx(hmenu, Constants.TPM_LEFTBUTTON | Constants.TPM_RETURNCMD, (int)physicalScreenLocation.X, (int)physicalScreenLocation.Y, hwnd, IntPtr.Zero);
-            if (0 != cmd)
-            {
-                UnsafeNativeMethods.PostMessage(hwnd, Constants.SYSCOMMAND, new IntPtr(cmd), IntPtr.Zero);
             }
         }
 

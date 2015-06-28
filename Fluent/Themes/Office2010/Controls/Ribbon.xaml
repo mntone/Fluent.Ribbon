@@ -16,8 +16,8 @@
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
             <Fluent:RibbonTitleBar x:Name="PART_RibbonTitleBar"
-                                   Height="{Binding Path=(Fluent:RibbonProperties.TitleBarHeight), RelativeSource={RelativeSource Self}}"
-                                   Style="{DynamicResource RibbonTitleBarStyle}"
+								   Height="{Binding TitleBarHeight, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Fluent:RibbonWindow}}}"
+								   Style="{DynamicResource RibbonTitleBarStyle}"
                                    Margin="20,0,113,0"
                                    VerticalAlignment="Top"
                                    HorizontalAlignment="Left"
@@ -64,9 +64,9 @@
                 <Fluent:RibbonTabControl.Margin>
                     <MultiBinding Converter="{x:Static Converters:StaticConverters.ThicknessConverter}">
                         <Binding Source="{x:Static internal:DoubleUtil.Zero}" />
-                        <Binding RelativeSource="{RelativeSource Self}"
-                                 Path="(Fluent:RibbonProperties.TitleBarHeight)" />
-                        <Binding Source="{x:Static internal:DoubleUtil.Zero}" />
+						<Binding RelativeSource="{RelativeSource FindAncestor, AncestorType={x:Type Fluent:RibbonWindow}}"
+								 Path="TitleBarHeight" />
+						<Binding Source="{x:Static internal:DoubleUtil.Zero}" />
                         <Binding Source="{x:Static internal:DoubleUtil.Zero}" />
                     </MultiBinding>
                 </Fluent:RibbonTabControl.Margin>
@@ -76,8 +76,8 @@
                     BorderBrush="{DynamicResource QuickAccessToolBarOutterBorderBrush}"
                     BorderThickness="0,1"
                     Grid.Row="1"
-                    Height="{Binding Path=(Fluent:RibbonProperties.TitleBarHeight), RelativeSource={RelativeSource Self}}">
-                <Border BorderBrush="{DynamicResource QuickAccessToolBarInnerBorderBrush}"
+					Height="{Binding TitleBarHeight, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Fluent:RibbonWindow}}}">
+				<Border BorderBrush="{DynamicResource QuickAccessToolBarInnerBorderBrush}"
                         BorderThickness="0,1"
                         Background="{DynamicResource QuickAccessToolBarInnerBackgroundBrush}">
                     <ContentControl x:Name="contentControl"

@@ -9,6 +9,8 @@
 				Value="True" />
 		<Setter Property="MinHeight"
 				Value="23" />
+		<Setter Property="Background"
+				Value="{DynamicResource StatusBarBackgroundBrush}" />
 		<Setter Property="FontFamily"
 				Value="{x:Static SystemFonts.StatusFontFamily}" />
 		<Setter Property="FontSize"

@@ -44,7 +44,7 @@ namespace Fluent
             foreach (UIElement item in this.InternalChildren)
             {
                 finalRect.Width = sizes[index].Width;//item.DesiredSize.Width;
-                finalRect.Height = Math.Max(finalSize.Height, sizes[index].Height);//Math.Max(finalSize.Height, item.DesiredSize.Height);
+                finalRect.Height = finalSize.Height;//Math.Max(finalSize.Height, item.DesiredSize.Height);
                 item.Arrange(finalRect);
                 finalRect.X += sizes[index].Width;// item.DesiredSize.Width;
                 index++;

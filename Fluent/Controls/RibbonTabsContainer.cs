@@ -59,7 +59,7 @@ namespace Fluent
 
             Size desiredSize = MeasureChildrenDesiredSize(availableSize);
 
-            // Performs steps as described in "2007 MICROSOFTÆ OFFICE FLUENTô 
+            // Performs steps as described in "2007 MICROSOFTÆ OFFICE FLUENTÅE
             // USER INTERFACE DESIGN GUIDELINES"
 
             // Step 1. Gradually remove empty space to the right of the tabs
