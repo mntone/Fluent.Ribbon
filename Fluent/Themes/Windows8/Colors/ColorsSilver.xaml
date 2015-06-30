@@ -4,8 +4,6 @@
                      Color="#DADBDC" />
     <SolidColorBrush x:Key="RibbonBackgoundBrush"
                      Color="#F5F6F7" />
-    <SolidColorBrush x:Key="ActiveTabBackgroundBrush"
-                     Color="#F5F6F7" />
     <SolidColorBrush x:Key="GroupSeparatorBackgroundBrush"
                      Color="#E2E3E4" />
     <SolidColorBrush x:Key="DefaultFontBrush"

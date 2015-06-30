@@ -6,8 +6,8 @@
                     xmlns:Converters="clr-namespace:Fluent.Converters"
                     mc:Ignorable="d">
     <ResourceDictionary.MergedDictionaries>
-		<ResourceDictionary Source="pack://application:,,,/Fluent;component\Themes\Windows8\Controls\RibbonScrollViewer.xaml" />
-		<ResourceDictionary Source="pack://application:,,,/Fluent;component\Themes\Windows8\Controls\MenuItem.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/Fluent;component\Themes\Windows8\Controls\RibbonScrollViewer.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/Fluent;component\Themes\Windows8\Controls\MenuItem.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
     <Converters:ApplicationMenuRightContentExtractorConverter x:Key="ApplicationMenuRightContentExtractorConvert" />
@@ -25,24 +25,21 @@
             </ResourceDictionary>
         </ControlTemplate.Resources>
         <Grid Width="Auto"
-              Height="53"
-              Background="#00000000">
+              Height="53">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="44" />
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
-            <Border x:Name="border"
-                    HorizontalAlignment="Stretch"
-                    Margin="0"
-                    Width="Auto"
-                    Visibility="Collapsed"
-                    Background="{DynamicResource ButtonHoverBackgroundBrush}"
-                    BorderBrush="{DynamicResource ButtonHoverBorderBrush}"
-                    BorderThickness="1"
-                    Grid.Column="0"
-                    Grid.ColumnSpan="3">
-            </Border>
+            <Rectangle x:Name="border"
+                       HorizontalAlignment="Stretch"
+                       Width="Auto"
+                       Visibility="Collapsed"
+                       Fill="{DynamicResource ButtonHoverBackgroundBrush}"
+                       Stroke="{DynamicResource ButtonHoverBorderBrush}"
+                       StrokeThickness="1"
+                       Grid.Column="0"
+                       Grid.ColumnSpan="3" />
             <TextBlock x:Name="textBlock_Copy"
                        Text="{TemplateBinding Header}"
                        Width="Auto"
@@ -397,8 +394,7 @@
                                     Width="Auto"
                                     Height="Auto"
                                     BorderBrush="{DynamicResource ContextMenuBarBackgroundBrush}"
-                                    BorderThickness="1"
-                                     />
+                                    BorderThickness="1" />
                             <Grid Margin="1"
                                   HorizontalAlignment="Stretch"
                                   VerticalAlignment="Stretch">
@@ -653,8 +649,7 @@
                                     Width="Auto"
                                     Height="Auto"
                                     BorderBrush="{DynamicResource ContextMenuBarBackgroundBrush}"
-                                    BorderThickness="1"
-                                    />
+                                    BorderThickness="1" />
                             <Grid Margin="1"
                                   HorizontalAlignment="Stretch"
                                   VerticalAlignment="Stretch">
@@ -1168,8 +1163,7 @@
                                     Width="Auto"
                                     Height="Auto"
                                     BorderBrush="{DynamicResource ContextMenuBarBackgroundBrush}"
-                                    BorderThickness="1"
-                                    />
+                                    BorderThickness="1" />
                             <Grid Margin="1"
                                   HorizontalAlignment="Stretch"
                                   VerticalAlignment="Stretch">
@@ -1514,8 +1508,7 @@
                                     Width="Auto"
                                     Height="Auto"
                                     BorderBrush="{DynamicResource ContextMenuBarBackgroundBrush}"
-                                    BorderThickness="1"
-                                    />
+                                    BorderThickness="1" />
                             <Grid Margin="1"
                                   HorizontalAlignment="Stretch"
                                   VerticalAlignment="Stretch">

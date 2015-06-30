@@ -86,7 +86,6 @@
     <Compile Include="Controls\ComboBox.cs" />
     <Compile Include="Controls\ContextMenu.cs" />
     <Compile Include="IHeaderedControl.cs" />
-    <Compile Include="Internal\Dpi_2.cs" />
     <Compile Include="Internal\UIHelper.cs" />
     <Compile Include="Services\ContextMenuService.cs" />
     <Compile Include="Converters\ApplicationMenuRightContentExtractorConverter.cs" />

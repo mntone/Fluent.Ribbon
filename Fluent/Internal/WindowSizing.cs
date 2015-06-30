@@ -15,7 +15,6 @@
     {
         private readonly RibbonWindow window;
         private HwndSource windowSource;
-        private bool fixingNastyWindowChromeBug;
 
         private bool isPerMonitorDpiSupported = false;
         internal Dpi systemDpi;

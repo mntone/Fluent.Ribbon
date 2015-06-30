@@ -10,6 +10,11 @@
 	<SolidColorBrush x:Key="GroupBoxFontBrush"
 					 Color="#929292" />
 
+	<SolidColorBrush x:Key="TabMouseOverBackgroundBrush"
+					 Color="#FDFDFF" />
+	<SolidColorBrush x:Key="TabSelectedBackgroundBrush"
+					 Color="#F5F6F7" />
+
 
 	<SolidColorBrush x:Key="ComboBoxButtonHoverBorderBrush"
 					 Color="#A8D3FF" />

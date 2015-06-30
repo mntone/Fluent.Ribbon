@@ -413,7 +413,7 @@ namespace Fluent
             }
         }
 
-        internal void UpdateWindowChrome()
+        private void UpdateWindowChrome()
         {
             var windowChrome = WindowChrome.GetWindowChrome(this);
             if (windowChrome == null)

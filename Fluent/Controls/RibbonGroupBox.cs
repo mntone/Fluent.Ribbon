@@ -33,8 +33,8 @@ namespace Fluent
     [TemplatePart(Name = "PART_DialogLauncherButton", Type = typeof(Button))]
     [TemplatePart(Name = "PART_Popup", Type = typeof(Popup))]
     [TemplatePart(Name = "PART_UpPanel", Type = typeof(Panel))]
-    public class RibbonGroupBox : ItemsControl, IQuickAccessItemProvider, IDropDownControl, IKeyTipedControl, IHeaderedControl
-	{
+    public class RibbonGroupBox: ItemsControl, IQuickAccessItemProvider, IDropDownControl, IKeyTipedControl, IHeaderedControl
+    {
         #region Fields
 
         // up part
@@ -44,7 +44,7 @@ namespace Fluent
 
         // Freezed image (created during snapping)
         private Image snappedImage;
-        
+
         // Is visual currently snapped
         private bool isSnapped;
 
@@ -916,9 +916,9 @@ namespace Fluent
 
         private StateScale GetCurrentIntermediateStateScale()
         {
-            var stateScale = new StateScale 
+            var stateScale = new StateScale
                 {
-                    Scale = this.ScaleIntermediate, 
+                    Scale = this.ScaleIntermediate,
                     State = this.StateIntermediate
                 };
             return stateScale;
@@ -993,7 +993,7 @@ namespace Fluent
 
             groupBox.DropDownOpened += this.OnQuickAccessOpened;
             groupBox.DropDownClosed += this.OnQuickAccessClosed;
-            
+
             groupBox.State = RibbonGroupBoxState.QuickAccess;
 
             RibbonControl.Bind(this, groupBox, "ItemTemplateSelector", ItemTemplateSelectorProperty, BindingMode.OneWay);
@@ -1090,7 +1090,7 @@ namespace Fluent
         /// Using a DependencyProperty as the backing store for CanAddToQuickAccessToolBar.  This enables animation, styling, binding, etc...
         /// </summary>
         public static readonly DependencyProperty CanAddToQuickAccessToolBarProperty =
-            DependencyProperty.Register("CanAddToQuickAccessToolBar", typeof(bool), typeof(RibbonGroupBox), new UIPropertyMetadata(true, RibbonControl.OnCanAddToQuickAccessToolbarChanged));        
+            DependencyProperty.Register("CanAddToQuickAccessToolBar", typeof(bool), typeof(RibbonGroupBox), new UIPropertyMetadata(true, RibbonControl.OnCanAddToQuickAccessToolbarChanged));
 
         #endregion
 

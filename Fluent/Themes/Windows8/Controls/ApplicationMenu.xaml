@@ -41,7 +41,6 @@
                    Grid.ColumnSpan="2">
                 <Grid Name="DropDown"
                       SnapsToDevicePixels="True"
-                      Margin="0"
                       VerticalAlignment="Top">
                     <Border x:Name="PART_DropDownBorder"
                             MinWidth="{TemplateBinding ActualWidth}"
@@ -53,61 +52,58 @@
                             d:LayoutOverrides="Width, Height"
                             HorizontalAlignment="Stretch"
                             VerticalAlignment="Top">
-                        <Grid Width="Auto"
-                              Height="Auto"
-                              HorizontalAlignment="Stretch"
-                              VerticalAlignment="Top">
-                            <Grid HorizontalAlignment="Stretch"
-                                  VerticalAlignment="Top">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="Auto" />
-                                    <RowDefinition Height="*" />
-                                    <RowDefinition Height="Auto"
-                                                   MinHeight="17" />
-                                </Grid.RowDefinitions>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="Auto"
-                                                      MinWidth="100" />
-                                    <ColumnDefinition Width="*" />
-                                </Grid.ColumnDefinitions>
-                                <Border Grid.Row="0"
-                                        Grid.ColumnSpan="2"
-                                        BorderThickness="0,0,0,1"
-                                        BorderBrush="{DynamicResource ContextMenuSeparatorBrush}"
-                                        Margin="0"
-                                        Background="{DynamicResource RibbonBackgoundBrush}">
-                                    <ContentControl x:Name="buttonOnPopupContent"
-                                                    HorizontalAlignment="Left"
-                                                    Margin="-1,-1,0,0" />
-                                </Border>
+						<Grid Width="Auto"
+							  Height="Auto"
+							  HorizontalAlignment="Stretch"
+							  VerticalAlignment="Top">
+							<Grid.RowDefinitions>
+								<RowDefinition Height="Auto" />
+								<RowDefinition Height="*" />
+								<RowDefinition Height="Auto"
+											   MinHeight="17" />
+							</Grid.RowDefinitions>
+							<Grid.ColumnDefinitions>
+								<ColumnDefinition Width="Auto"
+												  MinWidth="100" />
+								<ColumnDefinition Width="*" />
+							</Grid.ColumnDefinitions>
+							<Border Grid.Row="0"
+									Grid.ColumnSpan="2"
+									BorderThickness="0,0,0,1"
+									BorderBrush="{DynamicResource ContextMenuSeparatorBrush}"
+									Margin="0"
+									Background="{DynamicResource RibbonBackgoundBrush}">
+								<ContentControl x:Name="buttonOnPopupContent"
+												HorizontalAlignment="Left"
+												Margin="-1,-1,0,0" />
+							</Border>
 
-                                <StackPanel Orientation="Vertical"
-                                            ScrollViewer.VerticalScrollBarVisibility="Auto"
-                                            Grid.Row="1"
-                                            Grid.Column="0"
-                                            x:Name="PART_MenuPanel"
-                                            IsItemsHost="True"
-                                            KeyboardNavigation.DirectionalNavigation="Cycle" />
-                                <Border Grid.Row="1"
-                                        Grid.Column="1"
-                                        BorderThickness="1,0,0,0"
-                                        BorderBrush="{DynamicResource ContextMenuSeparatorBrush}"
-                                        Width="{TemplateBinding RightPaneWidth}"
-                                        Background="{DynamicResource GalleryBackgroundBrush}">
-                                    <ContentPresenter ContentSource="RightPaneContent"
-                                                      x:Name="PART_RightContentPresenter" />
-                                </Border>
-                                <Border Grid.Row="2"
-                                        Grid.ColumnSpan="2"
-                                        BorderThickness="0,1,0,0"
-                                        BorderBrush="{DynamicResource ContextMenuSeparatorBrush}"
-                                        Background="{DynamicResource RibbonBackgoundBrush}"
-                                        Margin="0">
-                                    <ContentPresenter ContentSource="FooterPaneContent" />
-                                </Border>
-                            </Grid>
-                        </Grid>
-                    </Border>
+							<StackPanel Orientation="Vertical"
+										ScrollViewer.VerticalScrollBarVisibility="Auto"
+										Grid.Row="1"
+										Grid.Column="0"
+										x:Name="PART_MenuPanel"
+										IsItemsHost="True"
+										KeyboardNavigation.DirectionalNavigation="Cycle" />
+							<Border Grid.Row="1"
+									Grid.Column="1"
+									BorderThickness="1,0,0,0"
+									BorderBrush="{DynamicResource ContextMenuSeparatorBrush}"
+									Width="{TemplateBinding RightPaneWidth}"
+									Background="{DynamicResource GalleryBackgroundBrush}">
+								<ContentPresenter ContentSource="RightPaneContent"
+												  x:Name="PART_RightContentPresenter" />
+							</Border>
+							<Border Grid.Row="2"
+									Grid.ColumnSpan="2"
+									BorderThickness="0,1,0,0"
+									BorderBrush="{DynamicResource ContextMenuSeparatorBrush}"
+									Background="{DynamicResource RibbonBackgoundBrush}"
+									Margin="0">
+								<ContentPresenter ContentSource="FooterPaneContent" />
+							</Border>
+						</Grid>
+					</Border>
                 </Grid>
             </Popup>
         </Grid>

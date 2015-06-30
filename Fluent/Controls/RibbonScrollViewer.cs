@@ -7,6 +7,7 @@
 // The license is available online http://fluent.codeplex.com/license
 #endregion
 
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 
@@ -15,8 +16,14 @@ namespace Fluent
     /// <summary>
     /// Represents ScrollViewer with modified hit test
     /// </summary>
-    public class RibbonScrollViewer : ScrollViewer
+    public class RibbonScrollViewer: ScrollViewer
     {
+        static RibbonScrollViewer()
+        {
+            var type = typeof(RibbonScrollViewer);
+            DefaultStyleKeyProperty.OverrideMetadata(type, new FrameworkPropertyMetadata(type));
+        }
+
         #region Overrides
 
         /// <summary>
